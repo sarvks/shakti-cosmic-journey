@@ -124,31 +124,7 @@ function PhilosophyMap() {
           </Reveal>
           <ol className="mt-14 space-y-3">
             {tattvas.map((t, i) => (
-              <motion.li
-                key={t.name}
-                style={{
-                  x: useTransform(spread, [0, 1], [0, (i % 2 ? 1 : -1) * (i * 2)]),
-                  opacity: useTransform(spread, [0, 0.15, 1], [0.35, 1, 1]),
-                }}
-                className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-l-2 py-3 pl-5"
-              >
-                <span
-                  className="eyebrow"
-                  style={{
-                    color:
-                      t.band === "Pure"
-                        ? "var(--color-gold)"
-                        : t.band === "Limiting"
-                          ? "var(--color-vermilion)"
-                          : "var(--color-mist)",
-                  }}
-                >
-                  {t.band}
-                </span>
-                <span className="deva text-lg text-lotus">{t.deva}</span>
-                <span className="font-display text-xl">{t.name}</span>
-                <span className="text-sm text-muted-foreground">{t.note}</span>
-              </motion.li>
+              <TattvaRow key={t.name} tattva={t} index={i} spread={spread} />
             ))}
           </ol>
           <p className="mt-8 text-center text-sm text-muted-foreground">
