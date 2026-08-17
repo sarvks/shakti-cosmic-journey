@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GoddessesRouteImport } from './routes/goddesses'
 import { Route as MahavidyasRouteImport } from './routes/mahavidyas'
+import { Route as PhilosophyRouteImport } from './routes/philosophy'
 import { Route as ShaktiRouteImport } from './routes/shakti'
 import { Route as SriChakraRouteImport } from './routes/sri-chakra'
 import { Route as TantraRouteImport } from './routes/tantra'
@@ -30,6 +31,11 @@ const GoddessesRoute = GoddessesRouteImport.update({
 const MahavidyasRoute = MahavidyasRouteImport.update({
   id: '/mahavidyas',
   path: '/mahavidyas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhilosophyRoute = PhilosophyRouteImport.update({
+  id: '/philosophy',
+  path: '/philosophy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShaktiRoute = ShaktiRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/goddesses': typeof GoddessesRouteWithChildren
   '/mahavidyas': typeof MahavidyasRoute
+  '/philosophy': typeof PhilosophyRoute
   '/shakti': typeof ShaktiRoute
   '/sri-chakra': typeof SriChakraRoute
   '/tantra': typeof TantraRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/goddesses': typeof GoddessesRouteWithChildren
   '/mahavidyas': typeof MahavidyasRoute
+  '/philosophy': typeof PhilosophyRoute
   '/shakti': typeof ShaktiRoute
   '/sri-chakra': typeof SriChakraRoute
   '/tantra': typeof TantraRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/goddesses': typeof GoddessesRouteWithChildren
   '/mahavidyas': typeof MahavidyasRoute
+  '/philosophy': typeof PhilosophyRoute
   '/shakti': typeof ShaktiRoute
   '/sri-chakra': typeof SriChakraRoute
   '/tantra': typeof TantraRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/goddesses'
     | '/mahavidyas'
+    | '/philosophy'
     | '/shakti'
     | '/sri-chakra'
     | '/tantra'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/goddesses'
     | '/mahavidyas'
+    | '/philosophy'
     | '/shakti'
     | '/sri-chakra'
     | '/tantra'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/goddesses'
     | '/mahavidyas'
+    | '/philosophy'
     | '/shakti'
     | '/sri-chakra'
     | '/tantra'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GoddessesRoute: typeof GoddessesRouteWithChildren
   MahavidyasRoute: typeof MahavidyasRoute
+  PhilosophyRoute: typeof PhilosophyRoute
   ShaktiRoute: typeof ShaktiRoute
   SriChakraRoute: typeof SriChakraRoute
   TantraRoute: typeof TantraRoute
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/mahavidyas'
       fullPath: '/mahavidyas'
       preLoaderRoute: typeof MahavidyasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/philosophy': {
+      id: '/philosophy'
+      path: '/philosophy'
+      fullPath: '/philosophy'
+      preLoaderRoute: typeof PhilosophyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shakti': {
@@ -190,6 +210,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GoddessesRoute: GoddessesRouteWithChildren,
   MahavidyasRoute: MahavidyasRoute,
+  PhilosophyRoute: PhilosophyRoute,
   ShaktiRoute: ShaktiRoute,
   SriChakraRoute: SriChakraRoute,
   TantraRoute: TantraRoute,
