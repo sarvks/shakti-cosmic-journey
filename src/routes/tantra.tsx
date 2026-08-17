@@ -22,7 +22,7 @@ export const Route = createFileRoute("/tantra")({
       },
     ],
   }),
-  component: TantraSection;
+  component: TantraSection,
 });
 
 const mapNodes = [
