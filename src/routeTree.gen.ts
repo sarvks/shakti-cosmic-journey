@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GoddessesRouteImport } from './routes/goddesses'
 import { Route as ShaktiRouteImport } from './routes/shakti'
+import { Route as GoddessesSlugRouteImport } from './routes/goddesses.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,34 +29,42 @@ const ShaktiRoute = ShaktiRouteImport.update({
   path: '/shakti',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GoddessesSlugRoute = GoddessesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => GoddessesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/goddesses': typeof GoddessesRoute
+  '/goddesses': typeof GoddessesRouteWithChildren
   '/shakti': typeof ShaktiRoute
+  '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/goddesses': typeof GoddessesRoute
+  '/goddesses': typeof GoddessesRouteWithChildren
   '/shakti': typeof ShaktiRoute
+  '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/goddesses': typeof GoddessesRoute
+  '/goddesses': typeof GoddessesRouteWithChildren
   '/shakti': typeof ShaktiRoute
+  '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/goddesses' | '/shakti'
+  fullPaths: '/' | '/goddesses' | '/shakti' | '/goddesses/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/goddesses' | '/shakti'
-  id: '__root__' | '/' | '/goddesses' | '/shakti'
+  to: '/' | '/goddesses' | '/shakti' | '/goddesses/$slug'
+  id: '__root__' | '/' | '/goddesses' | '/shakti' | '/goddesses/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  GoddessesRoute: typeof GoddessesRoute
+  GoddessesRoute: typeof GoddessesRouteWithChildren
   ShaktiRoute: typeof ShaktiRoute
 }
 
@@ -82,12 +91,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShaktiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/goddesses/$slug': {
+      id: '/goddesses/$slug'
+      path: '/$slug'
+      fullPath: '/goddesses/$slug'
+      preLoaderRoute: typeof GoddessesSlugRouteImport
+      parentRoute: typeof GoddessesRoute
+    }
   }
 }
 
+interface GoddessesRouteChildren {
+  GoddessesSlugRoute: typeof GoddessesSlugRoute
+}
+
+const GoddessesRouteChildren: GoddessesRouteChildren = {
+  GoddessesSlugRoute: GoddessesSlugRoute,
+}
+
+const GoddessesRouteWithChildren = GoddessesRoute._addFileChildren(
+  GoddessesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  GoddessesRoute: GoddessesRoute,
+  GoddessesRoute: GoddessesRouteWithChildren,
   ShaktiRoute: ShaktiRoute,
 }
 export const routeTree = rootRouteImport
