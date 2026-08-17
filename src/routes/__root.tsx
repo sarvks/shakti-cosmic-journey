@@ -77,14 +77,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "ŚAKTI — The Living Universe" },
+      {
+        name: "description",
+        content:
+          "An immersive, scholarly journey through Śākta traditions: Devī, the Mahāvidyās, Śrīvidyā, Tantra, yantra, mantra, philosophy and sacred geography.",
+      },
+      { property: "og:title", content: "ŚAKTI — The Living Universe" },
+      {
+        property: "og:description",
+        content:
+          "Śakti as philosophy, goddess, cosmology and practice — an animated educational atlas of Śāktism.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -92,6 +98,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@200;300;400;500&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
