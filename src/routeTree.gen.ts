@@ -10,12 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DissolutionRouteImport } from './routes/dissolution'
 import { Route as GoddessesRouteImport } from './routes/goddesses'
+import { Route as MahavidyasRouteImport } from './routes/mahavidyas'
+import { Route as PhilosophyRouteImport } from './routes/philosophy'
+import { Route as SacredPlacesRouteImport } from './routes/sacred-places'
 import { Route as ShaktiRouteImport } from './routes/shakti'
+import { Route as SriChakraRouteImport } from './routes/sri-chakra'
+import { Route as TantraRouteImport } from './routes/tantra'
+import { Route as TextsRouteImport } from './routes/texts'
+import { Route as GoddessesSlugRouteImport } from './routes/goddesses.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DissolutionRoute = DissolutionRouteImport.update({
+  id: '/dissolution',
+  path: '/dissolution',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GoddessesRoute = GoddessesRouteImport.update({
@@ -23,40 +36,140 @@ const GoddessesRoute = GoddessesRouteImport.update({
   path: '/goddesses',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MahavidyasRoute = MahavidyasRouteImport.update({
+  id: '/mahavidyas',
+  path: '/mahavidyas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhilosophyRoute = PhilosophyRouteImport.update({
+  id: '/philosophy',
+  path: '/philosophy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SacredPlacesRoute = SacredPlacesRouteImport.update({
+  id: '/sacred-places',
+  path: '/sacred-places',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShaktiRoute = ShaktiRouteImport.update({
   id: '/shakti',
   path: '/shakti',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SriChakraRoute = SriChakraRouteImport.update({
+  id: '/sri-chakra',
+  path: '/sri-chakra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TantraRoute = TantraRouteImport.update({
+  id: '/tantra',
+  path: '/tantra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TextsRoute = TextsRouteImport.update({
+  id: '/texts',
+  path: '/texts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoddessesSlugRoute = GoddessesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => GoddessesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/goddesses': typeof GoddessesRoute
+  '/dissolution': typeof DissolutionRoute
+  '/goddesses': typeof GoddessesRouteWithChildren
+  '/mahavidyas': typeof MahavidyasRoute
+  '/philosophy': typeof PhilosophyRoute
+  '/sacred-places': typeof SacredPlacesRoute
   '/shakti': typeof ShaktiRoute
+  '/sri-chakra': typeof SriChakraRoute
+  '/tantra': typeof TantraRoute
+  '/texts': typeof TextsRoute
+  '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/goddesses': typeof GoddessesRoute
+  '/dissolution': typeof DissolutionRoute
+  '/goddesses': typeof GoddessesRouteWithChildren
+  '/mahavidyas': typeof MahavidyasRoute
+  '/philosophy': typeof PhilosophyRoute
+  '/sacred-places': typeof SacredPlacesRoute
   '/shakti': typeof ShaktiRoute
+  '/sri-chakra': typeof SriChakraRoute
+  '/tantra': typeof TantraRoute
+  '/texts': typeof TextsRoute
+  '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/goddesses': typeof GoddessesRoute
+  '/dissolution': typeof DissolutionRoute
+  '/goddesses': typeof GoddessesRouteWithChildren
+  '/mahavidyas': typeof MahavidyasRoute
+  '/philosophy': typeof PhilosophyRoute
+  '/sacred-places': typeof SacredPlacesRoute
   '/shakti': typeof ShaktiRoute
+  '/sri-chakra': typeof SriChakraRoute
+  '/tantra': typeof TantraRoute
+  '/texts': typeof TextsRoute
+  '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/goddesses' | '/shakti'
+  fullPaths:
+    | '/'
+    | '/dissolution'
+    | '/goddesses'
+    | '/mahavidyas'
+    | '/philosophy'
+    | '/sacred-places'
+    | '/shakti'
+    | '/sri-chakra'
+    | '/tantra'
+    | '/texts'
+    | '/goddesses/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/goddesses' | '/shakti'
-  id: '__root__' | '/' | '/goddesses' | '/shakti'
+  to:
+    | '/'
+    | '/dissolution'
+    | '/goddesses'
+    | '/mahavidyas'
+    | '/philosophy'
+    | '/sacred-places'
+    | '/shakti'
+    | '/sri-chakra'
+    | '/tantra'
+    | '/texts'
+    | '/goddesses/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/dissolution'
+    | '/goddesses'
+    | '/mahavidyas'
+    | '/philosophy'
+    | '/sacred-places'
+    | '/shakti'
+    | '/sri-chakra'
+    | '/tantra'
+    | '/texts'
+    | '/goddesses/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  GoddessesRoute: typeof GoddessesRoute
+  DissolutionRoute: typeof DissolutionRoute
+  GoddessesRoute: typeof GoddessesRouteWithChildren
+  MahavidyasRoute: typeof MahavidyasRoute
+  PhilosophyRoute: typeof PhilosophyRoute
+  SacredPlacesRoute: typeof SacredPlacesRoute
   ShaktiRoute: typeof ShaktiRoute
+  SriChakraRoute: typeof SriChakraRoute
+  TantraRoute: typeof TantraRoute
+  TextsRoute: typeof TextsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,11 +181,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dissolution': {
+      id: '/dissolution'
+      path: '/dissolution'
+      fullPath: '/dissolution'
+      preLoaderRoute: typeof DissolutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/goddesses': {
       id: '/goddesses'
       path: '/goddesses'
       fullPath: '/goddesses'
       preLoaderRoute: typeof GoddessesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mahavidyas': {
+      id: '/mahavidyas'
+      path: '/mahavidyas'
+      fullPath: '/mahavidyas'
+      preLoaderRoute: typeof MahavidyasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/philosophy': {
+      id: '/philosophy'
+      path: '/philosophy'
+      fullPath: '/philosophy'
+      preLoaderRoute: typeof PhilosophyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sacred-places': {
+      id: '/sacred-places'
+      path: '/sacred-places'
+      fullPath: '/sacred-places'
+      preLoaderRoute: typeof SacredPlacesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shakti': {
@@ -82,13 +223,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShaktiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sri-chakra': {
+      id: '/sri-chakra'
+      path: '/sri-chakra'
+      fullPath: '/sri-chakra'
+      preLoaderRoute: typeof SriChakraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tantra': {
+      id: '/tantra'
+      path: '/tantra'
+      fullPath: '/tantra'
+      preLoaderRoute: typeof TantraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/texts': {
+      id: '/texts'
+      path: '/texts'
+      fullPath: '/texts'
+      preLoaderRoute: typeof TextsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goddesses/$slug': {
+      id: '/goddesses/$slug'
+      path: '/$slug'
+      fullPath: '/goddesses/$slug'
+      preLoaderRoute: typeof GoddessesSlugRouteImport
+      parentRoute: typeof GoddessesRoute
+    }
   }
 }
 
+interface GoddessesRouteChildren {
+  GoddessesSlugRoute: typeof GoddessesSlugRoute
+}
+
+const GoddessesRouteChildren: GoddessesRouteChildren = {
+  GoddessesSlugRoute: GoddessesSlugRoute,
+}
+
+const GoddessesRouteWithChildren = GoddessesRoute._addFileChildren(
+  GoddessesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  GoddessesRoute: GoddessesRoute,
+  DissolutionRoute: DissolutionRoute,
+  GoddessesRoute: GoddessesRouteWithChildren,
+  MahavidyasRoute: MahavidyasRoute,
+  PhilosophyRoute: PhilosophyRoute,
+  SacredPlacesRoute: SacredPlacesRoute,
   ShaktiRoute: ShaktiRoute,
+  SriChakraRoute: SriChakraRoute,
+  TantraRoute: TantraRoute,
+  TextsRoute: TextsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
