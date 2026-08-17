@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DissolutionRouteImport } from './routes/dissolution'
 import { Route as GoddessesRouteImport } from './routes/goddesses'
 import { Route as MahavidyasRouteImport } from './routes/mahavidyas'
 import { Route as PhilosophyRouteImport } from './routes/philosophy'
@@ -23,6 +24,11 @@ import { Route as GoddessesSlugRouteImport } from './routes/goddesses.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DissolutionRoute = DissolutionRouteImport.update({
+  id: '/dissolution',
+  path: '/dissolution',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GoddessesRoute = GoddessesRouteImport.update({
@@ -73,6 +79,7 @@ const GoddessesSlugRoute = GoddessesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dissolution': typeof DissolutionRoute
   '/goddesses': typeof GoddessesRouteWithChildren
   '/mahavidyas': typeof MahavidyasRoute
   '/philosophy': typeof PhilosophyRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dissolution': typeof DissolutionRoute
   '/goddesses': typeof GoddessesRouteWithChildren
   '/mahavidyas': typeof MahavidyasRoute
   '/philosophy': typeof PhilosophyRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dissolution': typeof DissolutionRoute
   '/goddesses': typeof GoddessesRouteWithChildren
   '/mahavidyas': typeof MahavidyasRoute
   '/philosophy': typeof PhilosophyRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dissolution'
     | '/goddesses'
     | '/mahavidyas'
     | '/philosophy'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dissolution'
     | '/goddesses'
     | '/mahavidyas'
     | '/philosophy'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dissolution'
     | '/goddesses'
     | '/mahavidyas'
     | '/philosophy'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DissolutionRoute: typeof DissolutionRoute
   GoddessesRoute: typeof GoddessesRouteWithChildren
   MahavidyasRoute: typeof MahavidyasRoute
   PhilosophyRoute: typeof PhilosophyRoute
@@ -166,6 +179,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dissolution': {
+      id: '/dissolution'
+      path: '/dissolution'
+      fullPath: '/dissolution'
+      preLoaderRoute: typeof DissolutionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/goddesses': {
@@ -248,6 +268,7 @@ const GoddessesRouteWithChildren = GoddessesRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DissolutionRoute: DissolutionRoute,
   GoddessesRoute: GoddessesRouteWithChildren,
   MahavidyasRoute: MahavidyasRoute,
   PhilosophyRoute: PhilosophyRoute,
