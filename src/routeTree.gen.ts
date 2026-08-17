@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GoddessesRouteImport } from './routes/goddesses'
 import { Route as ShaktiRouteImport } from './routes/shakti'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoddessesRoute = GoddessesRouteImport.update({
+  id: '/goddesses',
+  path: '/goddesses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShaktiRoute = ShaktiRouteImport.update({
@@ -25,27 +31,31 @@ const ShaktiRoute = ShaktiRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/goddesses': typeof GoddessesRoute
   '/shakti': typeof ShaktiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/goddesses': typeof GoddessesRoute
   '/shakti': typeof ShaktiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/goddesses': typeof GoddessesRoute
   '/shakti': typeof ShaktiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/shakti'
+  fullPaths: '/' | '/goddesses' | '/shakti'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shakti'
-  id: '__root__' | '/' | '/shakti'
+  to: '/' | '/goddesses' | '/shakti'
+  id: '__root__' | '/' | '/goddesses' | '/shakti'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GoddessesRoute: typeof GoddessesRoute
   ShaktiRoute: typeof ShaktiRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goddesses': {
+      id: '/goddesses'
+      path: '/goddesses'
+      fullPath: '/goddesses'
+      preLoaderRoute: typeof GoddessesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shakti': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GoddessesRoute: GoddessesRoute,
   ShaktiRoute: ShaktiRoute,
 }
 export const routeTree = rootRouteImport
