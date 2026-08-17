@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef, useState } from "react";
 import { CosmicParticles } from "@/components/cosmic/CosmicParticles";
 import { Environment, Note, Prose, Reveal, ScholarOnly, Title } from "@/components/cosmic/ui";
@@ -313,5 +313,38 @@ function PhilosophyMap() {
         </div>
       </Environment>
     </>
+  );
+}
+
+function TattvaRow({
+  tattva,
+  index,
+  spread,
+}: {
+  tattva: { name: string; deva: string; band: string; note: string };
+  index: number;
+  spread: MotionValue<number>;
+}) {
+  const x = useTransform(spread, [0, 1], [0, (index % 2 ? 1 : -1) * (index * 2)]);
+  const opacity = useTransform(spread, [0, 0.15, 1], [0.35, 1, 1]);
+  const color =
+    tattva.band === "Pure"
+      ? "var(--color-gold)"
+      : tattva.band === "Limiting"
+        ? "var(--color-vermilion)"
+        : "var(--color-mist)";
+
+  return (
+    <motion.li
+      style={{ x, opacity }}
+      className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-l-2 py-3 pl-5"
+    >
+      <span className="eyebrow" style={{ color }}>
+        {tattva.band}
+      </span>
+      <span className="deva text-lg text-lotus">{tattva.deva}</span>
+      <span className="font-display text-xl">{tattva.name}</span>
+      <span className="text-sm text-muted-foreground">{tattva.note}</span>
+    </motion.li>
   );
 }
