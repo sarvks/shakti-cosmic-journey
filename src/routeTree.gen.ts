@@ -17,6 +17,7 @@ import { Route as SacredPlacesRouteImport } from './routes/sacred-places'
 import { Route as ShaktiRouteImport } from './routes/shakti'
 import { Route as SriChakraRouteImport } from './routes/sri-chakra'
 import { Route as TantraRouteImport } from './routes/tantra'
+import { Route as TextsRouteImport } from './routes/texts'
 import { Route as GoddessesSlugRouteImport } from './routes/goddesses.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -59,6 +60,11 @@ const TantraRoute = TantraRouteImport.update({
   path: '/tantra',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TextsRoute = TextsRouteImport.update({
+  id: '/texts',
+  path: '/texts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GoddessesSlugRoute = GoddessesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/shakti': typeof ShaktiRoute
   '/sri-chakra': typeof SriChakraRoute
   '/tantra': typeof TantraRoute
+  '/texts': typeof TextsRoute
   '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/shakti': typeof ShaktiRoute
   '/sri-chakra': typeof SriChakraRoute
   '/tantra': typeof TantraRoute
+  '/texts': typeof TextsRoute
   '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/shakti': typeof ShaktiRoute
   '/sri-chakra': typeof SriChakraRoute
   '/tantra': typeof TantraRoute
+  '/texts': typeof TextsRoute
   '/goddesses/$slug': typeof GoddessesSlugRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/shakti'
     | '/sri-chakra'
     | '/tantra'
+    | '/texts'
     | '/goddesses/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/shakti'
     | '/sri-chakra'
     | '/tantra'
+    | '/texts'
     | '/goddesses/$slug'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/shakti'
     | '/sri-chakra'
     | '/tantra'
+    | '/texts'
     | '/goddesses/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +156,7 @@ export interface RootRouteChildren {
   ShaktiRoute: typeof ShaktiRoute
   SriChakraRoute: typeof SriChakraRoute
   TantraRoute: typeof TantraRoute
+  TextsRoute: typeof TextsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TantraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/texts': {
+      id: '/texts'
+      path: '/texts'
+      fullPath: '/texts'
+      preLoaderRoute: typeof TextsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/goddesses/$slug': {
       id: '/goddesses/$slug'
       path: '/$slug'
@@ -235,6 +255,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShaktiRoute: ShaktiRoute,
   SriChakraRoute: SriChakraRoute,
   TantraRoute: TantraRoute,
+  TextsRoute: TextsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
